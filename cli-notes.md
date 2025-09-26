@@ -1,4 +1,4 @@
-# Command Line Essentials for Beginners
+# 🖥️ Command Line Essentials for Beginners
 
 - `pwd` : Print Working Directory
 - `cd /`: Root directory or file system(absolute path)
@@ -16,12 +16,12 @@
 - Home directory: Your personal folder(`~`), which is part of the `absolute path: /home/username`
 
 
-## CTRL Shortcuts
+## ⌨️ CTRL Shortcuts
 - ``CTRL + R``: Reverse search - It is used for searching through your command history
 - ``CTRL + G``: Cancel search and return prompt
 
 
-## Creating Folders and Files
+## 📂 Creating Folders and Files
 
 - `mkdir -p /temp/tutorial or temp/tutorial`: Creates temp if it doesn't exit, then creates tutorial inside it (no error if they already exist)
 - `NB`: The meaning of -p is "Create parent directories as needed". It is called an "option or a switch or flag".
@@ -31,7 +31,7 @@
 
 - `mkdir -p temp/root temp/eyes temp/mouth`: root, eyes, and mouth are under `temp` folder
   
-## Files
+## 📄 Files
 
 - `touch file` : Create empty file
 - `echo "text" > file` : Create/overwrite file
@@ -40,23 +40,23 @@
 - `Example: cat file > or >> file`: Merge files
 - `less file`: Scrollable file viewer
 
-## Wildcards
+## ✨ Wildcards
 
 - `*`: Zero or more characters
 - `?`: Exactly one character
   
-## Redirection
+## 🔁 Redirection
 
 - `>`: Overwrite file
 - `>>`: Append to file
 
-## Case Sensitivity
+## 🔍 Case Sensitivity
 
 Linux treats uppercase and lowercase differently
 `a.txt != A.TXT != A.txt`
 `NB`: Best practice: Lowercase for normal files, uppercase for special files
 
-## Viewing and Checking
+## 💾 Viewing and Checking
 
 - `ls`: list files/folders
 - `ls -R`: Shows all sub-folders recursively
@@ -65,13 +65,13 @@ Linux treats uppercase and lowercase differently
 - `less`: Scrollable view, allows searching
 - `ls -l`: show full details of the directory or files both the permission OR it is used for checking permission and ownership of a file or directory.
 
-## Saving and Viewing Command Output
+## ✅  Saving and Viewing Command Output
 
 - `ls > output.txt`: Saves the list of files/folders in the current directory into output.txt(overwrites if its exist).
 - `cat output.txt`: Displays this saved content on the terminal
 `NB`: If you do `ls > output.txt` and then `cat output.txt`. What it will do is that, it will list all the folders/files with the output.txt in the current directory.
 
-## Moving and Manipulating files
+## 🔄 Moving and Manipulating files
 
 - ### Mv command (Move/Rename)
   
@@ -93,14 +93,14 @@ Linux treats uppercase and lowercase differently
       > - if `dir2` doesen't exist: Rename dir1 to dir2
       >  - if `dir2` exist: Move dir1 inside dir2
 
-## Copy Files
+## 📑 Copy Files
 
 - ``cp file1 file2``: Copy file1 into file2 (overwrites if exists)
 - ``cp file directory``: Copy the file into the directory
 - ``cp -r dir1 dir2``: Copy a whole directory and its contents
 - ``cp -i``: The system will ask for comfirmation before overwriting an existing file
   
-## Remove Files and directories
+##  ❌ Remove Files and directories
 
 - `rm file`: Delete a file
 - `rm -r directory`: Remove directory and its contents
@@ -111,7 +111,7 @@ Linux treats uppercase and lowercase differently
 - `trash-restore`: Restore your directory or file from trash
 - `rm -r -i -I`: Ask once
 
-## Wildcards and multiple files
+## 🔗 Wildcards and multiple files
 
 - `mv dir1/* .`: Move everything from dir1 into current directory
 - `mv file1 file2 file3 dir1`: Move multiple files into dir1
@@ -123,7 +123,7 @@ Linux treats uppercase and lowercase differently
 - `i`: Interactive mode - asks before moving to every file
 - `I`: Less intrusive interactive - asks once if you're removing more than 3 files or recursively
 
-## Backup Script
+## 💾 Backup Script
 
 1. Create the script file
     `nano backup.sh`: This open a nano file named backup.sh file where to write our script
@@ -176,7 +176,7 @@ Now you will see:
     > `experiment.txt(original)`
     `experiment.txt.bak(copy)`
 
-## Chmod (change mode)
+## 🔐 Chmod (change mode)
 
 It is used in linux to change file permission(read, write, and excute)
 
@@ -220,7 +220,7 @@ e.g To get the owner for full access
 4 + 2 + 1 = 7
 `chmod 744 file`
 
-## Find Command
+## 🔎 Find Command
 
 It searches for files and directories.
 
@@ -259,7 +259,7 @@ It searches for files and directories.
 - ``-N:`` Modified less than N days ago
 - ``N:`` Modified exactly N days ago
 
-## Grep Command
+## 🧩 Grep Command
 
 It searches content of the files
 
@@ -372,7 +372,7 @@ It sorts lines alphabetically or numerically
     - Always to tell your computer what to do by typing commands
     - Sometimes faster or more powerful than clicking icons
 
-2. #### Superuser(root)
+2. #### 👑 Superuser(root)
 
 - The superuser has all powers on the computer:
     - Can delete or change any file
@@ -381,18 +381,18 @@ It sorts lines alphabetically or numerically
     - Danger: Mistakes can break the whole system
 
 
-3. #### Why not login as root
+3. #### ⚠️ Why not login as root
 
 - Always being root is risky - one wrong command can destroy everything
 - Others can also misuse the system if you leave it open
 
-4. #### Su Command
+4. #### 🔑 Su Command
 
 - ``su -`` "Switch user"
     - Can switch to root or another user
     - Danger: After switching, all commands have super powers.
 
-5. #### Sudo Commands
+5. ####  🛡️ Sudo Commands
 - ``Sudo -`` "Do this command as superpower"
     - Safer than root because it only gives superpowers for one command at a time.
     - Always ask yourself: "Do I understand this computer, before using ``sudo``"
@@ -400,12 +400,13 @@ It sorts lines alphabetically or numerically
 ``e.g sudo apt update``: Refresh the package list
 ``e.g sudo apt upgrade``: Install available updates
 
-1. #### Installing Software Safely
+1. #### 🛠️ Installing Software Safely
 
 - Use official repositories(like apt on Ubuntu) when possible.
 - Be careful with commands from untrusted sources (curl, wget, pip, npm)
 
-7. #### Safely Rules:
+7. #### ⏱️ Rules
+🛡️ Safely Rules:
 
 - Don't login as root
 - Avoid using ``su`` unless necessary
@@ -428,7 +429,7 @@ It sorts lines alphabetically or numerically
 - exist - to close the terminal
 
 
-## Match any single character from inside the brackets
+## ⏱️ Match any single character from inside the brackets
 
 1. ### Range inside brackets
 
@@ -444,7 +445,7 @@ It sorts lines alphabetically or numerically
 - Matches file2.txt, file3.txt, etc
 - Excludes file1.txt
 
-## Difference blw help and man command
+## ❓Difference blw help and man command
 
 - ``help <command>``: It is used for built-in commands in the shell. ``e.g cd, echo, pwed, history etc...``. It gives a short description of how command works.
 
@@ -457,7 +458,7 @@ It sorts lines alphabetically or numerically
 
 ``type<command> - `` Provides a brief description of command-line programs
 
-## Alias in linux
+## 🔗 Alias in linux
 
 An alias is a shortcut for a longer command. ``e.g alias co = "command"``
 
@@ -467,7 +468,7 @@ An alias is a shortcut for a longer command. ``e.g alias co = "command"``
 
 - `Permanent alias`: Stays even after reboot. add it to ~/.bashrc or ~/.zshrc is using zsh shell.
 
-## Useful Commands
+## 🎯 Useful Commands
 
 1. Show all aliases
 
