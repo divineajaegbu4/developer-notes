@@ -3,12 +3,23 @@
 - `pwd` : Print Working Directory
 - `cd /`: Root directory or file system(absolute path)
 - `cd`: Home directory
+- `cd -``: (previous directory):This will take you to the previous directory you were in.
+- ``date``: Print date, time, months etc...
+- ``ls -la or al``: Shows list and hidden files at the same time
+- ``!!``: Run the last command you previouly executed.
+- ``file filename``: Used to find out what type of file a file is
 - `whoami`: Remind me of my username
 - `~`: Home directory
 - `NB`: Instead of writing `cd /home/username/Documents`, it’s better and cleaner to `cd ~/Documents`
 - Absolute path: Starts from `/` (root)
 - Relative path: Starts from where you're now
 - Home directory: Your personal folder(`~`), which is part of the `absolute path: /home/username`
+
+
+## CTRL Shortcuts
+- ``CTRL + R``: Reverse search - It is used for searching through your command history
+- ``CTRL + G``: Cancel search and return prompt
+
 
 ## Creating Folders and Files
 
@@ -80,9 +91,10 @@ Linux treats uppercase and lowercase differently
 
 ## Copy Files
 
-- `cp file1 file2`: Copy file1 into file2 (overwrites if exists)
-- `cp file directory`: Copy the file into the directory
-- `cp -r dir1 dir2`: Copy a whole directory and its contents
+- ``cp file1 file2``: Copy file1 into file2 (overwrites if exists)
+- ``cp file directory``: Copy the file into the directory
+- ``cp -r dir1 dir2``: Copy a whole directory and its contents
+- ``cp -i``: The system will ask for comfirmation before overwriting an existing file
   
 ## Remove Files and directories
 
@@ -139,6 +151,27 @@ Now you will see:
 `NB`: Scripts are like rebots that do repeated jobs for you
 `$(dollar sign)`: The only real sign used in shell to access variables/arguments. You can't replace it with another
 
+## Clear Step
+
+1. Create the script file
+    `nano backup.sh`
+
+2. Inside backup.sh, write
+    `cp $1 $1.bak`
+
+3. Make it executable
+    `chmod 744 backup.sh`
+
+4. Run it
+    > `touch experiment.txt`
+    `./backup.sh experiment.txt`
+
+5. Result 🔥🔥
+   
+
+    > `experiment.txt(original)`
+    `experiment.txt.bak(copy)`
+
 ## Chmod (change mode)
 
 It is used in linux to change file permission(read, write, and excute)
@@ -182,3 +215,202 @@ In short:
 e.g To get the owner for full access
 4 + 2 + 1 = 7
 `chmod 744 file`
+
+## Find Command
+
+It searches for files and directories.
+
+#### Basic Syntax
+> ``find <path> [options]``
+> ``e.g find Documents -name "*.txt" or find /home -type d -name myFolder``
+
+ #### ⚙️ Common Options:
+
+- `` -type f:`` Only regular files
+- ``-type d:`` Only directories
+- ``-iname "*.txt":`` Case-insensitive name match. Ignores uppercase or lowercase
+- ``-name "*.txt" (pattern):`` Match file name
+- ``-size +1k:`` Files bigger than IkB
+- ``-user $user:`` Files owned by you
+- ``-perm 644:`` Files with specific permission
+- ``-mtime -2:`` Files modified in last two days
+- ``-exec <command> {} \; : `` Run a command on each file found
+
+###### -Size
+- ``K:`` bytes
+- ``K:`` kilobytes
+- ``M:`` megabytes
+- ``G:`` gigabytes
+
+###### Prefix meaning
+- ``+:`` Larger than the size
+- ``-:`` Smaller than the size
+- ``no prefix:`` Exactly equal to the size
+
+##### Meaning of prefixes of -mtime
+- ``+N:`` Modified more than N days ago
+- ``-N:`` Modified less than N days ago
+- ``N:`` Modified exactly N days ago
+
+
+## Grep Command
+It searches content of the files
+
+#### Basic Syntax
+
+```bash
+grep [options] "pattern" <file(s)>``
+e.g grep "Divine" *.txt
+
+### Notes
+
+1.  Search inside all files that end with .txt in the current directory.
+
+2. Look for the text “Divine” in those files.
+
+3. It does not search directories, only the files that match *.txt.
+
+```
+
+#### ⚙️ Common Options
+
+- ``-l:`` Show only filenames containing the pattern
+- ``-L:`` Show filenames that do NOT contain the pattern
+- ``-i:`` Ignore case(case-insensitive)
+- ``-v:`` Show lines that do NOT match
+- ``-n:`` Show line numbers with matches
+
+##### Tip:
+- ``-v:`` Works on lines
+- ``-L:`` Works on files
+
+#### Combine Find + Grep
+```bash
+
+``find Documents -type f -name "*.txt" -user $USER -exec grep -l "backup" {} \;``
+
+### Notes
+
+1. Finds .txt files in the Documents directory.
+
+2. Only includes files owned by your user ($USER).
+
+3. Searches for the text "backup" inside those files.
+
+4. Prints the names of files that contain the text.
+
+```
+
+### Example: replace spaces with new lines in a file
+
+``tr " " '\n' <  file.txt``
+
+## A bit of Plumbing
+
+### ``wc -``  Word count
+
+It counts lines, words, characters, and longest line
+
+``e.g wc -l file.txt``
+
+##### Options
+
+- ``-l:`` Count lines
+- ``-w:`` Count words
+- ``-c:`` Count bytes
+- ``-m:`` Count characters
+- ``-L:`` Length of the longest line
+
+``NB: Pipelines(|)``
+
+### ``Uniq -`` Uniq Lines
+
+It removes consecutive duplicate lines
+``e.g uniq -c file.txt``
+
+##### Options
+
+- ``-c:``  Show counts of duplicate
+- ``-i:`` Ignore cases(case-insensitive)
+- ``-u:`` Show only unique lines
+
+### ``Sort -`` Sort Lines
+It sorts lines alphabetically or numerically
+``e.g sort -u file.txt``
+
+##### Options
+- ``-f:`` Ignore case (case-insensitive)
+- ``-r:`` Reverse order
+- ``-n:`` Numeric sort
+- ``-u:`` Remove duplicate
+- ``-t 'DELM':`` Set delamiter
+- ``-c:`` Check if already sorted
+
+``e.g cut -d ' ' -f2 file.txt``
+
+``Key idea:`` These commands can be combined using pipes(|) to analyze text files, count words, find unique entries, sort, and search patterns efficiently.
+
+``man - `` Stands for "manual"
+
+``man <command> e.g man ls``
+
+``NB:`` It shows the documents or help page for other commands in linux. It is a built-in instruction book for your computer.
+
+
+## Command Line and Superuser
+
+1. #### Command Line
+    - Always to tell your computer what to do by typing commands
+    - Sometimes faster or more powerful than clicking icons
+
+2. #### Superuser(root)
+
+- The superuser has all powers on the computer:
+    - Can delete or change any file
+    - Can shutdown or restart system
+    - can change network and security settings
+    - Danger: Mistakes can break the whole system
+
+
+3. #### Why not login as root
+
+- Always being root is risky - one wrong command can destroy everything
+- Others can also misuse the system if you leave it open
+
+4. #### Su Command
+
+- ``su -`` "Switch user"
+    - Can switch to root or another user
+    - Danger: After switching, all commands have super powers.
+
+5. #### Sudo Commands
+- ``Sudo -`` "Do this command as superpower"
+    - Safer than root because it only gives superpowers for one command at a time.
+    - Always ask yourself: "Do I understand this computer, before using ``sudo``"
+
+6. #### Installing Software Safely
+
+- Use official repositories(like apt on Ubuntu) when possible.
+- Be careful with commands from untrusted sources (curl, wget, pip, npm)
+
+7. #### Safely Rules:
+
+- Don't login as root
+- Avoid using ``su`` unless necessary
+- Use ``sudo`` for single commands
+- Only run commands you understand
+- Installing from official sources is safest. 
+
+
+## Session commands in linux
+
+- Restart now - sudo reboot
+- Shutdown now - sudo shutdown down
+- Shedule shutdown - sudo shutdown +10
+- Shedule restart - sudo shutdown -r +5
+- Logout - logout
+- Lock screen - gnome-screensaver-command -l
+- Suspend/sleep - systemctl suspend
+- cancel shutdown - sudo shutdown -c
+- shutdown and restart later - sudo shutdown -r +5
+- exist - to close the terminal
