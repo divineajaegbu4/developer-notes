@@ -83,6 +83,10 @@ Linux treats uppercase and lowercase differently
 
     `mv file1 dir2`: Move the file into the directory
 
+- ### Mv the directory and its contents
+
+`mv -i dir1 dir2`: Move the whole directory and its contents into dir2 (asks before overwriting)
+
 - ### Mv directory directory
   
     >`mv dir1 dir2`
@@ -237,23 +241,26 @@ It searches for files and directories.
 - ``-exec <command> {} \; : `` Run a command on each file found
 
 ###### -Size
+
 - ``K:`` bytes
 - ``K:`` kilobytes
 - ``M:`` megabytes
 - ``G:`` gigabytes
 
 ###### Prefix meaning
+
 - ``+:`` Larger than the size
 - ``-:`` Smaller than the size
 - ``no prefix:`` Exactly equal to the size
 
 ##### Meaning of prefixes of -mtime
+
 - ``+N:`` Modified more than N days ago
 - ``-N:`` Modified less than N days ago
 - ``N:`` Modified exactly N days ago
 
-
 ## Grep Command
+
 It searches content of the files
 
 #### Basic Syntax
@@ -281,13 +288,15 @@ e.g grep "Divine" *.txt
 - ``-n:`` Show line numbers with matches
 
 ##### Tip:
+
 - ``-v:`` Works on lines
 - ``-L:`` Works on files
 
 #### Combine Find + Grep
+
 ```bash
 
-``find Documents -type f -name "*.txt" -user $USER -exec grep -l "backup" {} \;``
+find Documents -type f -name "*.txt" -user $USER -exec grep -l "backup" {} \;
 
 ### Notes
 
@@ -388,7 +397,10 @@ It sorts lines alphabetically or numerically
     - Safer than root because it only gives superpowers for one command at a time.
     - Always ask yourself: "Do I understand this computer, before using ``sudo``"
 
-6. #### Installing Software Safely
+``e.g sudo apt update``: Refresh the package list
+``e.g sudo apt upgrade``: Install available updates
+
+1. #### Installing Software Safely
 
 - Use official repositories(like apt on Ubuntu) when possible.
 - Be careful with commands from untrusted sources (curl, wget, pip, npm)
@@ -414,3 +426,59 @@ It sorts lines alphabetically or numerically
 - cancel shutdown - sudo shutdown -c
 - shutdown and restart later - sudo shutdown -r +5
 - exist - to close the terminal
+
+
+## Match any single character from inside the brackets
+
+1. ### Range inside brackets
+
+`` ls file[1-3].txt -`` Matches file1.txt, file2.txt, and file3.txt. Do not match file4.txt
+
+2. ### Character Set
+
+`` ls *[abc].txt - `` Matches any ``.txt`` file ending with a, b. or c
+
+3. ### Navigation with ! and ^
+
+`` ls file[!1].txt -`` 
+- Matches file2.txt, file3.txt, etc
+- Excludes file1.txt
+
+## Difference blw help and man command
+
+- ``help <command>``: It is used for built-in commands in the shell. ``e.g cd, echo, pwed, history etc...``. It gives a short description of how command works.
+
+###### WHILE
+
+
+- ``man <command>``: It is used for all commands(both built-in and external programs like ``ls, cp,mv, git). It opens a detailed manual page with sections
+
+``e.g``
+
+``type<command> - `` Provides a brief description of command-line programs
+
+## Alias in linux
+
+An alias is a shortcut for a longer command. ``e.g alias co = "command"``
+
+##### Types
+  
+- `Temporary alias`: Only works in the current terminal session. When you reboot it will go.
+
+- `Permanent alias`: Stays even after reboot. add it to ~/.bashrc or ~/.zshrc is using zsh shell.
+
+## Useful Commands
+
+1. Show all aliases
+
+`alias`
+
+2.Remove an alias
+
+unalias name
+
+3. Reload aliases after editing ~/.bashrc
+
+source ~/.bashrc
+
+``e.g alias update = "sudo apt update && sudo apt upgrade"
